@@ -1,22 +1,43 @@
+
+<html>
 <head>
-<script language=javascript>
-<!--
-var redirectagent = navigator.userAgent.toLowerCase();
-var redirect_devices = ['vnd.wap.xhtml+xml', 'sony', 'symbian', 'nokia', 'samsung', 'mobile', 'windows ce', 'epoc', 'opera mini', 'nitro', 'j2me', 'midp-', 'cldc-', 'netfront', 'mot', 'up.browser', 'up.link', 'audiovox', 'blackberry', 'ericsson', 'panasonic', 'philips', 'sanyo', 'sharp', 'sie-', 'portalmmm', 'blazer', 'avantgo', 'danger', 'palm', 'series60', 'palmsource', 'pocketpc', 'smartphone', 'rover', 'ipaq', 'au-mic', 'alcatel', 'ericy', 'vodafone', 'wap1', 'wap2', 'teleca', 'playstation', 'lge', 'lg-', 'iphone', 'android', 'htc', 'dream', 'webos', 'bolt', 'nintendo'];
-for (var i in redirect_devices) {
-if (redirectagent.indexOf(redirect_devices[i]) != -1) {
-location.replace("http://kircha.eb2a.com/mplayer.php?u=<?=$_GET["u"]?>");
+<meta charset="utf-8">
+<script src="https://cdn.jsdelivr.net/clappr/latest/clappr.min.js"></script>
+<script>
+function getParam ( sname )
+{
+	var params = location.search.substr(location.search.indexOf("?")+1);
+	var sval =  params.replace("sv=", "");
+	return sval;
 }
-}
--->
+var sv = getParam("sv");
 </script>
 </head>
+<body style="margin:0px;
+">
+<div id="player"></div>
+<script>
+	if (navigator.userAgent.match(/Android/i) || navigator.userAgent.match(/webOS/i) || navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPod/i) || navigator.userAgent.match(/iPad/i) || navigator.userAgent.match(/Mobile Safari/i) || navigator.userAgent.match(/Blackberry/i)){
+		document.write("\<video style=\"width:100%;height:100%\" controls autoplay preload=\"auto\" src=\""+sv+"\"\>\<\/video\>");
+	}else {
+		player = new Clappr.Player({
+			source: sv,
+			parentId: '#player',
+			width: '100%', height: '100%',
+			hideMediaControl: true,
+			autoPlay: true
+		});	
+	}
+	</script>
+	<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-<body>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/clappr/latest/clappr.min.js"></script>
+  ga('create', 'UA-105325405-1', 'auto');
+  ga('send', 'pageview');
 
-  <div id="player"></div>
-  <script>
-    var player = new Clappr.Player({source: "<?=$_GET["u"]?>",autoPlay: true, width:"100%", height:"100%", parentId: "#player"});
-  </script>
+</script>
 </body>
+</html>
